@@ -232,7 +232,7 @@ VALUES( " + IdBiblioteca + ",'" + ISBN + "','" + Titulo + "','" + Autor + "','" 
                 {
                     //Comando  a ser executado
                     //Se a biblioteca selecionada fôr 0 mostra todos os livros das quatro bibliotecas
-                    //caso contrário mostra apenas os da biblioteca selecionada
+                    //caso contrário mostra apenas os da biblioteca selecionada.
                     if (bibliotecaSelecionada != 0)
                     {
                         cmd.CommandText = @"SELECT IdLivro, IdBiblioteca, ISBN, Titulo, Autor, Editora, Edicao,  Descricao, TipoEmprestimo, Estado FROM Livros WHERE IdBiblioteca=" + mainWindow.getIdBibliotecaEscolhida() + "";
