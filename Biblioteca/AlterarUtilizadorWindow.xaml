@@ -1,0 +1,30 @@
+﻿<Window x:Class="Biblioteca.AlterarUtilizadorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AlterarUtilizadorWindow" Height="529.064" Width="660.591"
+        Closing="Window_Closing" >
+    <Grid Margin="0,0,2,-21">
+
+        <Label x:Name="Label_Nome" Content="Nome" HorizontalAlignment="Left" Margin="49,68,0,0" VerticalAlignment="Top" Width="148" Height="30"/>
+        <Label x:Name="LabelTelefone" Content="Telefone" HorizontalAlignment="Left" Margin="49,116,0,0" VerticalAlignment="Top" Width="148" Height="30"/>
+        <Label x:Name="Label_Email" Content="email" HorizontalAlignment="Left" Margin="49,163,0,0" VerticalAlignment="Top" Width="148" Height="30"/>
+        <Label x:Name="Label_Password" Content="PassWord" HorizontalAlignment="Left" Margin="49,207,0,0" VerticalAlignment="Top" Width="148" Height="30"/>
+        <Label x:Name="Label_Morada" Content="Morada" HorizontalAlignment="Left" Margin="49,255,0,0" VerticalAlignment="Top" Width="148" Height="30"/>
+        <Label x:Name="Label_codPostal" Content="Código Postal" HorizontalAlignment="Left" Margin="49,310,0,0" VerticalAlignment="Top" Width="148" Height="30"/>
+        <Label x:Name="Label_Localidade" Content="Localidade" HorizontalAlignment="Left" Margin="49,352,0,0" VerticalAlignment="Top" Width="148" Height="30"/>
+        <TextBox x:Name="TextBox_NomeUtilizador" HorizontalAlignment="Left" Height="30" Margin="225,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="328"/>
+        <TextBox x:Name="TextBox_Telefone" HorizontalAlignment="Left" Height="30" Margin="225,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="328"/>
+        <TextBox x:Name="TextBox_Email" HorizontalAlignment="Left" Height="30" Margin="225,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="328"/>
+        <TextBox x:Name="TextBox_PassWord" HorizontalAlignment="Left" Height="30" Margin="225,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="328"/>
+        <TextBox x:Name="TextBox_CodPostal" HorizontalAlignment="Left" Height="30" Margin="225,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="328"/>
+        <TextBox x:Name="TextBox_Morada" HorizontalAlignment="Left" Height="30" Margin="225,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="328"/>
+        <TextBox x:Name="TextBox_Localidade" HorizontalAlignment="Left" Height="30" Margin="225,352,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="328"/>
+        <Button x:Name="Button_subMeter" Content="SUBMETER" HorizontalAlignment="Left" Margin="273,453,0,0" VerticalAlignment="Top" Width="220" Height="26" Click="Button_subMeter_Click"/>
+        <Button x:Name="Button_desativarUtilizador" Content="DESATIVAR UTILIZADOR" HorizontalAlignment="Left" Margin="49,453,0,0" VerticalAlignment="Top" Width="170" Height="26" Click="Button_desativarUtilizador_Click"/>
+        <Label x:Name="Label_Id" Content="ID" HorizontalAlignment="Left" Margin="49,28,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="TextBox_IdUtilizador" IsReadOnly="True" HorizontalAlignment="Left" Height="26" Margin="225,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="328"/>
+        <Label x:Name="Label_Estado" Content="Estado" HorizontalAlignment="Left" Margin="49,402,0,0" VerticalAlignment="Top" Width="148"/>
+        <TextBox x:Name="TextBox_Estado" IsReadOnly="True" HorizontalAlignment="Left" Height="35" Margin="225,402,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="328"/>
+
+    </Grid>
+</Window>

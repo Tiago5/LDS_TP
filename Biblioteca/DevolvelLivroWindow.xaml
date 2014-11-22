@@ -1,0 +1,15 @@
+﻿<Window x:Class="Biblioteca.DevolvelLivroWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DevolvelLivroWindow" Height="300" Width="555.844"
+        Closing="Window_Closing">
+    <Grid Margin="10,0,2,-4">
+        <TextBox x:Name="TextBox_IdLivro" HorizontalAlignment="Left" Height="40" Margin="237,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="129"/>
+        <Label Content="Introduza o ID do livro a devolver" HorizontalAlignment="Left" Margin="46,48,0,0" VerticalAlignment="Top" Height="40" Width="186"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="100" Margin="46,119,0,0" VerticalAlignment="Top" Width="439">
+            <Label x:Name="Label_Resultado" Content="" Margin="9"/>
+        </Border>
+        <Button x:Name="Button_DevolverLivro" Content="DEVOLVER" HorizontalAlignment="Left" Margin="383,51,0,0" VerticalAlignment="Top" Width="102" Height="37" Click="Button_DevolverLivro_Click"/>
+
+    </Grid>
+</Window>

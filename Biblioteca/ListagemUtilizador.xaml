@@ -1,0 +1,23 @@
+﻿<Window x:Class="Biblioteca.ListagemUtilizador"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ListagemUtilizadorWindow" Height="491.045" Width="737.313"
+        Closing="DataWindow_Closing">
+    <Grid Margin="0,0,20,18">
+        <ListView x:Name="ListView_Utilizadores" HorizontalAlignment="Left" Height="266" Margin="42,27,0,0" VerticalAlignment="Top" Width="633" MouseDoubleClick="ListView_Utilizadores_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="120" DisplayMemberBinding="{Binding IdUtilizador}"/>
+                    <GridViewColumn Header="NOME" Width="120" DisplayMemberBinding="{Binding NomeUtilizador}"/>
+                    <GridViewColumn Header="TELEFONE" Width="120" DisplayMemberBinding="{Binding TelefoneUtilizador}"/>
+                    <GridViewColumn Header="EMAIL" Width="120" DisplayMemberBinding="{Binding EMail}"/>
+                    <GridViewColumn Header="ESTADO" Width="120" DisplayMemberBinding="{Binding Estado}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="Button_InserirUtilizador" Content="INSERIR" HorizontalAlignment="Left" Margin="42,319,0,0" VerticalAlignment="Top" Width="197" Height="113" Click="Button_InserirUtilizador_Click"/>
+        <TextBox x:Name="Textbox_PesqUtilizador" HorizontalAlignment="Left" Height="33" Margin="292,376,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="357" RenderTransformOrigin="0.5,1.586"/>
+        <Button x:Name="Button_PesqUtilizador" Content="PESQUISAR" HorizontalAlignment="Left" Margin="387,338,0,0" VerticalAlignment="Top" Width="166" Height="33" Click="Button_PesqUtilizador_Click"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="113" Margin="268,319,0,0" VerticalAlignment="Top" Width="407"/>
+    </Grid>
+</Window>

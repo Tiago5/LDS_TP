@@ -1,0 +1,20 @@
+﻿<Window x:Class="Biblioteca.Emprestimos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Emprestimo" Height="392.537" Width="576.119">
+    <Grid Margin="0,0,0,27">
+        <Label x:Name="Label_IdUtilizador" Content="ID Utilizador" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="138" Height="30"/>
+        <TextBox x:Name="TextBox_IdUtilizador" HorizontalAlignment="Left" Height="30" Margin="169,36,0,0" TextWrapping="Wrap" Text="Id utilizador" VerticalAlignment="Top" Width="372" RenderTransformOrigin="0.188,3.907"/>
+        <Label x:Name="Label_IdLivro" Content="ID Livro" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top" Width="138" Height="30"/>
+        <Label x:Name="Label_Titulo" Content="Titulo Livro" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="138" Height="30"/>
+        <TextBox x:Name="TextBox_Titulo" HorizontalAlignment="Left" Height="30" Margin="169,172,0,0" TextWrapping="Wrap" Text="titulo do livro" VerticalAlignment="Top" Width="372"/>
+        <Label x:Name="Label_nomeUtilizador" Content="Nome Utilizador" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Width="138" Height="30"/>
+        <TextBox x:Name="TextBox_NomeUtilizador" HorizontalAlignment="Left" Height="30" Margin="169,85,0,0" TextWrapping="Wrap" Text="nome utilizador" VerticalAlignment="Top" Width="372"/>
+        <Label x:Name="Label_DataInicio" Content="Data Inicio" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalAlignment="Top" Height="30" Width="138"/>
+        <Label x:Name="Label_DataFim" Content="Data Entrega Prevista" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.389,2.112" Width="138" Height="30"/>
+        <TextBox x:Name="TextBox_DataInicio" HorizontalAlignment="Left" Height="30" Margin="169,211,0,0" TextWrapping="Wrap" Text="data inicio" VerticalAlignment="Top" Width="372"/>
+        <TextBox x:Name="Textbox_DataFim" HorizontalAlignment="Left" Height="30" Margin="169,250,0,0" TextWrapping="Wrap" Text="Data fim" VerticalAlignment="Top" Width="372"/>
+        <TextBox x:Name="TextBox_IdLivro" HorizontalAlignment="Left" Height="30" Margin="169,131,0,0" TextWrapping="Wrap" Text="id livro" VerticalAlignment="Top" Width="372"/>
+
+    </Grid>
+</Window>

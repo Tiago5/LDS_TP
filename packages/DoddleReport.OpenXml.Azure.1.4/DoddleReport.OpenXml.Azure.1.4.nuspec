@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>DoddleReport.OpenXml.Azure</id>
+    <version>1.4</version>
+    <title>DoddleReport.OpenXml.Azure</title>
+    <authors>Matt Hidinger,  Luiz Adilson</authors>
+    <owners>Matt Hidinger,  Luiz Adilson</owners>
+    <licenseUrl>http://doddlereport.codeplex.com/license</licenseUrl>
+    <projectUrl>http://doddlereport.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>fix for issue 7508 (Azure excel openxml reports). Adds OpenXML support to DoddleReport. The currently supported format is Excel and is more robust than the default ExcelReportWriter in DoddleReport.</description>
+    <copyright>Copyright 2011</copyright>
+    <tags>doddle.report doddle.reporting doddle reporting pdf excel csv openxml azure</tags>
+    <dependencies>
+      <dependency id="DoddleReport" version="1.4" />
+    </dependencies>
+  </metadata>
+</package>
