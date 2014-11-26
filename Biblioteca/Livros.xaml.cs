@@ -25,7 +25,7 @@ namespace Biblioteca
         {
             InitializeComponent();
             mainWindow = mw;
-            TextBox_IdBiblioteca.Text = mainWindow.Combobox_Escolha_Biblioteca.SelectedItem.ToString();
+            TextBox_IdBiblioteca.Text = mainWindow.getIdBiblioteca().ToString();
         }
         //Ao fechar informa a MainWindow que a janela livro foi fechada
         private void DataWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

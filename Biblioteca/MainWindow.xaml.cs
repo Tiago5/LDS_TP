@@ -42,14 +42,46 @@ namespace Biblioteca
         private Sqlite_Helper dbListaLivros;
         private Boolean viewPesquisa = false;
 
-        public MainWindow()
+        private long idbiblioteca;//
+        public MainWindow(Object bibliotecaSelecionada)
         {
             InitializeComponent();
+            this.LabelNomeBiblioteca.Content = getNomeBibliotecaEscolhida(bibliotecaSelecionada);
+            this.idbiblioteca = getIdBibliotecaEscolhida(bibliotecaSelecionada);
             dbListaLivros = new Sqlite_Helper(this);
-            dbListaLivros.carregarComboBox();
-            Combobox_Escolha_Biblioteca.SelectedIndex = 0;
-            ///ListaView que recebe os livros conforme o indice escolhido na ComboBox
+            ///ListaView que recebe os livros conforme o indice escolhido na ComboBox inicial 
+            atualizarListaViewLivros();
             ListViewLivros.ItemsSource = livros;
+        }
+
+        /// <summary>
+        /// #Retorna o ID da biblioteca selecionada na combobox
+        /// </summary>
+        /// <returns>ID Biblioteca</returns>
+        public long getIdBibliotecaEscolhida(Object bibliotecaSelecionada)
+        {
+            // extrai o id da biblioteca da combobox.
+            string[] temp = bibliotecaSelecionada.ToString().Split('-');
+            return long.Parse(temp[0]);
+        }
+
+        /// <summary>
+        /// #Retorna o nome da biblioteca selecionada na combobox
+        /// </summary>
+        /// <returns>Nome Biblioteca</returns>
+        public string getNomeBibliotecaEscolhida(Object bibliotecaSelecionada)
+        {
+            // extrai o id da biblioteca da combobox.
+            string[] temp = bibliotecaSelecionada.ToString().Split('-');
+            return temp[1];
+        }
+
+        /// <summary>
+        /// #Retorna o ID da biblioteca
+        /// </summary>
+        /// <returns>ID Biblioteca</returns>
+        public long getIdBiblioteca(){
+            return this.idbiblioteca;
         }
 
         // button para abrir a listagem de utilizadores
@@ -66,11 +98,7 @@ namespace Biblioteca
 
         // button para adicionar livro
         private void Button_InLivro_Click(object sender, RoutedEventArgs e)
-        {
-            if (Combobox_Escolha_Biblioteca.SelectedItem.ToString() != "0 - Todos os livros")
-            {
-
-
+        {            
                 //Só abre a janela se ela estiver fechada
                 if (windowsInserirLivroAberta == false)
                 {
@@ -78,11 +106,6 @@ namespace Biblioteca
                     livrosInserirWindow = new Livros(this);
                     livrosInserirWindow.Show();
                 }
-            }
-            else
-            {
-                MessageBox.Show("POR FAVOR, SELECIONE UMA DAS QUATRO BIBLIOTECAS");
-            }
         }
 
         //Procurar id na lista de livros da biblioteca de trabalho para alterar
@@ -192,7 +215,7 @@ namespace Biblioteca
             string TipoEmprestimo)
         {
 
-            dbListaLivros.inserirLivro(getIdBibliotecaEscolhida(), ISBN, Titulo, Autor, Editora, Edicao, Descricao, TipoEmprestimo);
+            dbListaLivros.inserirLivro(this.idbiblioteca, ISBN, Titulo, Autor, Editora, Edicao, Descricao, TipoEmprestimo);
             atualizarListaViewLivros();
         }
 
@@ -216,10 +239,10 @@ namespace Biblioteca
         }
 
         // adiciona librarias a comboBox
-        public void adElementoComboBox(string a)
-        {
-            this.Combobox_Escolha_Biblioteca.Items.Add(a);
-        }
+        //public void adElementoComboBox(string a)
+        //{
+        //    this.Combobox_Escolha_Biblioteca.Items.Add(a);
+        //}
 
         //Lista os livros conforme a biblioteca escolhiha
         private void Combobox_Escolha_Biblioteca_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -247,7 +270,7 @@ namespace Biblioteca
             ListViewLivros.ItemsSource = livros;
             TextBox_PesquisaLivros.Text = "";
             // extrai o id da biblioteca da combobox.
-            dbListaLivros.carregarlistaLivros(getIdBibliotecaEscolhida());
+            dbListaLivros.carregarlistaLivros(this.idbiblioteca);
             //Faz a contagem do total de livros em cada biblioteca
             Label_NumeroLivros.Content = livros.Count.ToString();
         }
@@ -328,22 +351,20 @@ namespace Biblioteca
 
         }
 
-        /// <summary>
-        /// Retorna o ID da biblioteca selecionada na comboBox (biblioteca de trabalho)
-        /// </summary>
-        /// <returns>ID Biblioteca</returns>
-        public long getIdBibliotecaEscolhida()
-        {
-            Object bibliotecaSelecionada = Combobox_Escolha_Biblioteca.SelectedItem;
-            // extrai o id da biblioteca da combobox.
-            string[] temp = bibliotecaSelecionada.ToString().Split(' ');
-            return long.Parse(temp[0]);
-        }
+        //// <summary>
+        //// Retorna o ID da biblioteca selecionada na comboBox (biblioteca de trabalho)
+        //// </summary>
+        //// <returns>ID Biblioteca</returns>
+        ////public long getIdBibliotecaEscolhida()
+        ////{
+        ////    Object bibliotecaSelecionada = Combobox_Escolha_Biblioteca.SelectedItem;
+        ////     extrai o id da biblioteca da combobox.
+        ////    string[] temp = bibliotecaSelecionada.ToString().Split(' ');
+        ////    return long.Parse(temp[0]);
+        ////}
 
         private void Button_EditarLivro_Click(object sender, RoutedEventArgs e)
         {
-            if (Combobox_Escolha_Biblioteca.SelectedItem.ToString() != "0 - Todos os livros")
-            {
                 if (windowsEditarLivroAberta == false)
                 {
 
@@ -351,12 +372,6 @@ namespace Biblioteca
                     alterarLivroView = new AlterarLivroView(this);
                     alterarLivroView.Show();
                 }
-            }
-            else
-            {
-                MessageBox.Show("POR FAVOR, SELECIONE UMA DAS QUATRO BIBLIOTECAS");
-            }
-
         }
 
         private void Button_Pesquisas_Click(object sender, RoutedEventArgs e)
@@ -431,8 +446,6 @@ namespace Biblioteca
         // button emprestimo
         private void Button_Emprestimo_Click(object sender, RoutedEventArgs e)
         {
-            if (Combobox_Escolha_Biblioteca.SelectedItem.ToString() != "0 - Todos os livros")
-            {
                 //Só abre a janela se ela estiver fechada
                 if (windowEmpretimoAberta == false)
                 {
@@ -440,52 +453,26 @@ namespace Biblioteca
                     empretimoLivroWindow = new EmprestimoLivroWindow(this);
                     empretimoLivroWindow.Show();
                 }
-            }
-            else
-            {
-                MessageBox.Show("POR FAVOR, SELECIONE UMA DAS QUATRO BIBLIOTECAS");
-            }
         }
 
         private void Button_Devolucao_Click(object sender, RoutedEventArgs e)
         {
-
-            if (Combobox_Escolha_Biblioteca.SelectedItem.ToString() != "0 - Todos os livros")
-            {
                 if (windowDevolverLivro == false)
                 {
                     devolverLivroWindow = new DevolvelLivroWindow(this);
                     windowDevolverLivro = true;
                     devolverLivroWindow.Show();
                 }
-
-            }
-            else
-            {
-                MessageBox.Show("POR FAVOR, SELECIONE UMA DAS QUATRO BIBLIOTECAS");
-            }
-
         }
 
         private void Button_ListarEmprestimo_Click(object sender, RoutedEventArgs e)
         {
-
-
-            if (Combobox_Escolha_Biblioteca.SelectedItem.ToString() != "0 - Todos os livros")
-            {
                 if (windowListagemEmprestimosAberta == false)
                 {
-                    listagemEmprestimos = new ListagemEmprestimos(getIdBibliotecaEscolhida());
+                    listagemEmprestimos = new ListagemEmprestimos(this.idbiblioteca);
                     windowListagemEmprestimosAberta = true;
                     listagemEmprestimos.Show();
                 }
-
-            }
-            else
-            {
-                MessageBox.Show("POR FAVOR, SELECIONE UMA DAS QUATRO BIBLIOTECAS");
-            }
-
         }
 
     }

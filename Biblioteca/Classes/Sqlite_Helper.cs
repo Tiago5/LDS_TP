@@ -13,6 +13,8 @@ namespace Biblioteca
         private MainWindow mainWindow;
         private ListagemUtilizador lista;
         private ListagemEmprestimos listagemEmprestimos;
+        private Inicio.WindowEscolhaBiblioteca escolherBiblioteca; //#
+
         //Intancia com a Mainwindow
         public Sqlite_Helper(MainWindow mainWindow)
         {
@@ -33,6 +35,112 @@ namespace Biblioteca
         {
 
         }
+
+        ///<summary>
+        ///#Intancia com a Escolha da biblioteca para carregar a comboBox de escolha da biblioteca
+        ///</summary>
+        public Sqlite_Helper(Inicio.WindowEscolhaBiblioteca escolherBiblioteca)
+        {
+            this.escolherBiblioteca = escolherBiblioteca;
+        }
+        /// <summary>
+        /// #Carrega todas a bibliotecas na ComboBox para escolher uma para a sessão de trabalho
+        /// </summary>
+
+        public void carregarComboBox()
+        {
+            // Localizar Ficheiro
+            var dbFile = @"..\..\Biblioteca.db";
+            // Gerir informação de ficheiro localizado
+            if (File.Exists(dbFile)) Console.Out.WriteLine("File found!" + dbFile);
+            else Console.Out.WriteLine("File NOT found!" + dbFile);
+            // Parametros para aceder à base de dados
+            var connString = string.Format(@"Data Source={0}; Pooling=false; FailIfMissing=false;", dbFile);
+            // Utilizar factory para gerir os sub-sistemas de queries
+            using (var factory = new System.Data.SQLite.SQLiteFactory())
+            // Criar ligação fisica em forma de uma conexão passível de ser reutilizada.
+            using (System.Data.Common.DbConnection dbConn = factory.CreateConnection())
+            {
+                dbConn.ConnectionString = connString;
+                // Abrir o "pipe" para a base de dados
+                dbConn.Open();
+                using (System.Data.Common.DbCommand cmd = dbConn.CreateCommand())
+                {
+                    //Comando a ser executado
+                    cmd.CommandText = @"SELECT IdBiblioteca, NomeBiblioteca FROM Bibliotecas";
+                    // Executar comando e proceder à leitura dos dados
+                    using (System.Data.Common.DbDataReader reader = cmd.ExecuteReader())
+                    {
+                        string juntar = "";
+                        while (reader.Read())
+                        {
+                            long ID = reader.GetInt64(0);
+                            string Data = reader.GetString(1);
+                            juntar = ID + "-" + Data;
+                            
+                            this.escolherBiblioteca.adElementoComboBox(juntar);
+                        }
+                    }
+                    // Iniciar a limpeza da conexão e "pipe"
+                    cmd.Dispose();
+                }
+                if (dbConn.State != System.Data.ConnectionState.Closed)
+                    dbConn.Close();
+                dbConn.Dispose();
+                factory.Dispose();
+            }
+        }
+        ///// <summary>
+        ///// Carrega todas a bibliotecas na ComboBox mais a "0 - Todos os livros" no indice zero
+        ///// para depois ser listada a lista de livros conforme a bibioteca escolhida
+        ///// </summary>
+
+        //public void carregarComboBox()
+        //{
+        //    // Localizar Ficheiro
+        //    var dbFile = @"..\..\Biblioteca.db";
+        //    // Gerir informação de ficheiro localizado
+        //    if (File.Exists(dbFile)) Console.Out.WriteLine("File found!" + dbFile);
+        //    else Console.Out.WriteLine("File NOT found!" + dbFile);
+        //    // Parametros para aceder à base de dados
+        //    var connString = string.Format(@"Data Source={0}; Pooling=false; FailIfMissing=false;", dbFile);
+        //    // Utilizar factory para gerir os sub-sistemas de queries
+        //    using (var factory = new System.Data.SQLite.SQLiteFactory())
+        //    // Criar ligação fisica em forma de uma conexão passível de ser reutilizada.
+        //    using (System.Data.Common.DbConnection dbConn = factory.CreateConnection())
+        //    {
+        //        dbConn.ConnectionString = connString;
+        //        // Abrir o "pipe" para a base de dados
+        //        dbConn.Open();
+        //        using (System.Data.Common.DbCommand cmd = dbConn.CreateCommand())
+        //        {
+        //            //Comando a ser executado
+        //            cmd.CommandText = @"SELECT IdBiblioteca, NomeBiblioteca FROM Bibliotecas";
+        //            // Executar comando e proceder à leitura dos dados
+        //            using (System.Data.Common.DbDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                string juntar = "";
+        //                //Adiciona no indice zero da ComboBox "0 - Todos os livros"
+        //                this.mainWindow.adElementoComboBox("0 - Todos os livros");
+        //                while (reader.Read())
+        //                {
+        //                    long ID = reader.GetInt64(0);
+        //                    string Data = reader.GetString(1);
+        //                    juntar = ID + " - " + Data;
+        //                    this.mainWindow.adElementoComboBox(juntar);
+        //                }
+        //            }
+        //            // Iniciar a limpeza da conexão e "pipe"
+        //            cmd.Dispose();
+        //        }
+        //        if (dbConn.State != System.Data.ConnectionState.Closed)
+        //            dbConn.Close();
+        //        dbConn.Dispose();
+        //        factory.Dispose();
+        //    }
+        //}
+
+
 
         //Inserir livro
         public void inserirLivro(long IdBiblioteca, string ISBN, string Titulo, string Autor, string Editora, string Edicao, string Descricao,
@@ -235,7 +343,7 @@ VALUES( " + IdBiblioteca + ",'" + ISBN + "','" + Titulo + "','" + Autor + "','" 
                     //caso contrário mostra apenas os da biblioteca selecionada.
                     if (bibliotecaSelecionada != 0)
                     {
-                        cmd.CommandText = @"SELECT IdLivro, IdBiblioteca, ISBN, Titulo, Autor, Editora, Edicao,  Descricao, TipoEmprestimo, Estado FROM Livros WHERE IdBiblioteca=" + mainWindow.getIdBibliotecaEscolhida() + "";
+                        cmd.CommandText = @"SELECT IdLivro, IdBiblioteca, ISBN, Titulo, Autor, Editora, Edicao,  Descricao, TipoEmprestimo, Estado FROM Livros WHERE IdBiblioteca=" + mainWindow.getIdBiblioteca() + "";
                     }
                     else
                     {
@@ -269,55 +377,7 @@ VALUES( " + IdBiblioteca + ",'" + ISBN + "','" + Titulo + "','" + Autor + "','" 
                 factory.Dispose();
             }
         }
-        /// <summary>
-        /// Carrega todas a bibliotecas na ComboBox mais a "0 - Todos os livros" no indice zero
-        /// para depois ser listada a lista de livros conforme a bibioteca escolhida
-        /// </summary>
-
-        public void carregarComboBox()
-        {
-            // Localizar Ficheiro
-            var dbFile = @"..\..\Biblioteca.db";
-            // Gerir informação de ficheiro localizado
-            if (File.Exists(dbFile)) Console.Out.WriteLine("File found!" + dbFile);
-            else Console.Out.WriteLine("File NOT found!" + dbFile);
-            // Parametros para aceder à base de dados
-            var connString = string.Format(@"Data Source={0}; Pooling=false; FailIfMissing=false;", dbFile);
-            // Utilizar factory para gerir os sub-sistemas de queries
-            using (var factory = new System.Data.SQLite.SQLiteFactory())
-            // Criar ligação fisica em forma de uma conexão passível de ser reutilizada.
-            using (System.Data.Common.DbConnection dbConn = factory.CreateConnection())
-            {
-                dbConn.ConnectionString = connString;
-                // Abrir o "pipe" para a base de dados
-                dbConn.Open();
-                using (System.Data.Common.DbCommand cmd = dbConn.CreateCommand())
-                {
-                    //Comando a ser executado
-                    cmd.CommandText = @"SELECT IdBiblioteca, NomeBiblioteca FROM Bibliotecas";
-                    // Executar comando e proceder à leitura dos dados
-                    using (System.Data.Common.DbDataReader reader = cmd.ExecuteReader())
-                    {
-                        string juntar = "";
-                        //Adiciona no indice zero da ComboBox "0 - Todos os livros"
-                        this.mainWindow.adElementoComboBox("0 - Todos os livros");
-                        while (reader.Read())
-                        {
-                            long ID = reader.GetInt64(0);
-                            string Data = reader.GetString(1);
-                            juntar = ID + " - " + Data;
-                            this.mainWindow.adElementoComboBox(juntar);
-                        }
-                    }
-                    // Iniciar a limpeza da conexão e "pipe"
-                    cmd.Dispose();
-                }
-                if (dbConn.State != System.Data.ConnectionState.Closed)
-                    dbConn.Close();
-                dbConn.Dispose();
-                factory.Dispose();
-            }
-        }
+        
 
 
         // Carrega os utilizadores da BD
