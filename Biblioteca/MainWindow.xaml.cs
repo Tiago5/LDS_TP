@@ -366,11 +366,79 @@ namespace Biblioteca
 
         }
 
+        //private void ListViewLivros_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    try
+        //    {
+
+        //        if (windowDetalhesLivroAberta == false)
+        //        {
+        //            // visualiza o livro da lista total de livros ou apenas de uma pesquida (detalhes)
+        //            if (viewPesquisa == false)
+        //            {
+        //                detalhesLivrowindow = new DetalhesLivroWindow();
+        //                detalhesLivrowindow.Show();
+        //                detalhesLivrowindow.TextBox_IdLivro.Text = livros[ListViewLivros.SelectedIndex].IdLivro.ToString();
+        //                detalhesLivrowindow.TextBox_ISBN.Text = livros[ListViewLivros.SelectedIndex].ISBN.ToString();
+        //                detalhesLivrowindow.TextBox_Titulo.Text = livros[ListViewLivros.SelectedIndex].Titulo.ToString();
+        //                detalhesLivrowindow.TextBox_Autor.Text = livros[ListViewLivros.SelectedIndex].Autor.ToString();
+        //                detalhesLivrowindow.Textbox_Editora.Text = livros[ListViewLivros.SelectedIndex].Editora.ToString();
+        //                detalhesLivrowindow.TextBox_Edicao.Text = livros[ListViewLivros.SelectedIndex].Edicao.ToString();
+        //                detalhesLivrowindow.TextBox_Descricao.Text = livros[ListViewLivros.SelectedIndex].Descricao.ToString();
+        //                detalhesLivrowindow.TextBox_IdBiblioteca.Text = livros[ListViewLivros.SelectedIndex].IdBiblioteca.ToString();
+        //                detalhesLivrowindow.TextBox_Estado.Text = livros[ListViewLivros.SelectedIndex].Estado.ToString();
+        //                if (livros[ListViewLivros.SelectedIndex].TipoEmprestimo.ToString() == "Normal")
+        //                {
+        //                    detalhesLivrowindow.RButton_Normal.IsChecked = true;
+        //                }
+        //                else
+        //                {
+        //                    detalhesLivrowindow.RButton_Expresso.IsChecked = true;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                detalhesLivrowindow = new DetalhesLivroWindow();
+        //                detalhesLivrowindow.Show();
+        //                detalhesLivrowindow.TextBox_IdLivro.Text = livrosPesquisados[ListViewLivros.SelectedIndex].IdLivro.ToString();
+        //                detalhesLivrowindow.TextBox_ISBN.Text = livrosPesquisados[ListViewLivros.SelectedIndex].ISBN.ToString();
+        //                detalhesLivrowindow.TextBox_Titulo.Text = livrosPesquisados[ListViewLivros.SelectedIndex].Titulo.ToString();
+        //                detalhesLivrowindow.TextBox_Autor.Text = livrosPesquisados[ListViewLivros.SelectedIndex].Autor.ToString();
+        //                detalhesLivrowindow.Textbox_Editora.Text = livrosPesquisados[ListViewLivros.SelectedIndex].Editora.ToString();
+        //                detalhesLivrowindow.TextBox_Edicao.Text = livrosPesquisados[ListViewLivros.SelectedIndex].Edicao.ToString();
+        //                detalhesLivrowindow.TextBox_Descricao.Text = livrosPesquisados[ListViewLivros.SelectedIndex].Descricao.ToString();
+        //                detalhesLivrowindow.TextBox_IdBiblioteca.Text = livrosPesquisados[ListViewLivros.SelectedIndex].IdBiblioteca.ToString();
+        //                detalhesLivrowindow.TextBox_Estado.Text = livrosPesquisados[ListViewLivros.SelectedIndex].Estado.ToString();
+        //                if (livrosPesquisados[ListViewLivros.SelectedIndex].TipoEmprestimo.ToString() == "Normal")
+        //                {
+        //                    detalhesLivrowindow.RButton_Normal.IsChecked = true;
+        //                }
+        //                else
+        //                {
+        //                    detalhesLivrowindow.RButton_Expresso.IsChecked = true;
+        //                }
+        //            }
+
+
+        //            windowDetalhesLivroAberta = true;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        detalhesLivrowindow.Close();
+        //        MessageBox.Show("Não Selecionou nenhum item!", "Excepção", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //}
 
         private void ListViewLivros_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            try
+            if (ListViewLivros.SelectedItem != null)
             {
+
+
+
+
+
 
                 if (windowDetalhesLivroAberta == false)
                 {
@@ -424,11 +492,7 @@ namespace Biblioteca
                     windowDetalhesLivroAberta = true;
                 }
             }
-            catch (Exception)
-            {
-                detalhesLivrowindow.Close();
-                MessageBox.Show("Não Selecionou nenhum item!", "Excepção", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+           
         }
 
         // button emprestimo

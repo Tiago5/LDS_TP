@@ -131,8 +131,10 @@ namespace Biblioteca
         // visualiza os dados do utilizador para poderem ser alterados
         private void ListView_Utilizadores_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            try
+            if (ListView_Utilizadores.SelectedItem != null)
             {
+
+
                 if (WindowsAlterarUtilizadorAberta == false)
                 {
                     // visualiza o utilizador da lista total de utilizadores ou apenas de uma pesquida 
@@ -188,11 +190,7 @@ namespace Biblioteca
                     // Indica que a Janela de alterarUtilizadorWindow está aberta
                     WindowsAlterarUtilizadorAberta = true;
                 }
-            }
-            catch (Exception)
-            {
-                alterarUtilizadorWindow.Close();
-                MessageBox.Show("Não Selecionou nenhum item!", "Excepção", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
 
         }
