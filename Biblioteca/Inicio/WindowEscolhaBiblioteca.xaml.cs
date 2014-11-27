@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace Biblioteca.Inicio
 {
     /// <summary>
-    /// Interaction logic for WindowEscolhaBiblioteca.xaml
+    /// #Interaction logic for WindowEscolhaBiblioteca.xaml
     /// </summary>
     public partial class WindowEscolhaBiblioteca : Window
     {
@@ -28,17 +28,23 @@ namespace Biblioteca.Inicio
             //Para centrar a janela
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             this.Show();
-
             dbListaLivros = new Sqlite_Helper(this);
             dbListaLivros.carregarComboBox();
             this.ComboBoxBiblioteca.SelectedIndex = 0;
         }
-        // Adiciona bibliotecas à comboBox
+        /// <summary>
+        /// #Adiciona bibliotecas à comboBox
+        /// </summary>
+        /// <param name="a"></param>
         public void adElementoComboBox(string a)
         {
             this.ComboBoxBiblioteca.Items.Add(a);
         }
-
+        /// <summary>
+        /// #Inicialisa a windows principal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonBiblioteca_Click(object sender, RoutedEventArgs e)
         {
             mainWindows = new MainWindow(ComboBoxBiblioteca.SelectedItem);
@@ -56,11 +62,13 @@ namespace Biblioteca.Inicio
             string[] temp = bibliotecaSelecionada.ToString().Split('-');
             return long.Parse(temp[0]);
         }
-
+        /// <summary>
+        /// #Altera a imagem conforme a biblioteca escolhida
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ComboBoxBiblioteca_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ////ImageBrush my = new ImageBrush();
-            ////my.ImageSource = new BitmapImage(new Uri());
             if (getIdBibliotecaEscolhida(ComboBoxBiblioteca.SelectedItem) == 1)
             {
                 this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "/Imagens/1 (28).jpg")));

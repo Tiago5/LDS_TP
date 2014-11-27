@@ -42,7 +42,7 @@ namespace Biblioteca
         private Sqlite_Helper dbListaLivros;
         private Boolean viewPesquisa = false;
 
-        private long idbiblioteca;//
+        private long idbiblioteca;//#
         public MainWindow(Object bibliotecaSelecionada)
         {
             InitializeComponent();
@@ -52,6 +52,7 @@ namespace Biblioteca
             ///ListaView que recebe os livros conforme o indice escolhido na ComboBox inicial 
             atualizarListaViewLivros();
             ListViewLivros.ItemsSource = livros;
+            this.RadioButtonNome.IsChecked = true;
         }
 
         /// <summary>
@@ -238,12 +239,6 @@ namespace Biblioteca
             livros.Add(new Livro { IdLivro = idL, IdBiblioteca = idB, ISBN = isbn, Titulo = titulo, Autor = autor, Editora = editora, Edicao = edicao, Descricao = descricao, TipoEmprestimo = tipoE, Estado = estado });
         }
 
-        // adiciona librarias a comboBox
-        //public void adElementoComboBox(string a)
-        //{
-        //    this.Combobox_Escolha_Biblioteca.Items.Add(a);
-        //}
-
         //Lista os livros conforme a biblioteca escolhiha
         private void Combobox_Escolha_Biblioteca_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -286,12 +281,19 @@ namespace Biblioteca
                 livrosPesquisados.Clear();
                 foreach (Livro l in livros)
                 {
-                    if (l.IdLivro.ToString().ToLower().Contains(dadosPesquisar.ToLower()) || l.Titulo.ToString().ToLower().Contains(dadosPesquisar.ToLower())
-                        || l.Autor.ToLower().Contains(dadosPesquisar.ToLower()) || l.Editora.ToLower().Contains(dadosPesquisar.ToLower()))
+
+                    if (this.RadioButtinId.IsChecked == true && l.IdLivro.ToString().ToLower().Contains(dadosPesquisar.ToLower()))
                     {
                         livrosPesquisados.Add(l);
                     }
-
+                    if (this.RadioButtonNome.IsChecked == true && l.Titulo.ToString().ToLower().Contains(dadosPesquisar.ToLower()))
+                    {
+                        livrosPesquisados.Add(l);
+                    }
+                    if (this.RadioButtonAutor.IsChecked == true && l.Autor.ToLower().Contains(dadosPesquisar.ToLower()))
+                    {
+                        livrosPesquisados.Add(l);
+                    }             
                 }
                 //o utilizador ve a lista dos livros encontrados
                 ListViewLivros.ItemsSource = livrosPesquisados;
@@ -351,17 +353,7 @@ namespace Biblioteca
 
         }
 
-        //// <summary>
-        //// Retorna o ID da biblioteca selecionada na comboBox (biblioteca de trabalho)
-        //// </summary>
-        //// <returns>ID Biblioteca</returns>
-        ////public long getIdBibliotecaEscolhida()
-        ////{
-        ////    Object bibliotecaSelecionada = Combobox_Escolha_Biblioteca.SelectedItem;
-        ////     extrai o id da biblioteca da combobox.
-        ////    string[] temp = bibliotecaSelecionada.ToString().Split(' ');
-        ////    return long.Parse(temp[0]);
-        ////}
+    
 
         private void Button_EditarLivro_Click(object sender, RoutedEventArgs e)
         {
@@ -373,11 +365,7 @@ namespace Biblioteca
                     alterarLivroView.Show();
                 }
         }
-
-        private void Button_Pesquisas_Click(object sender, RoutedEventArgs e)
-        {
-            PesquisaDadosLivros(TextBox_PesquisaLivros.Text);
-        }
+        
 
         private void ListViewLivros_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -474,6 +462,46 @@ namespace Biblioteca
                     listagemEmprestimos.Show();
                 }
         }
+        /// <summary>
+        /// #Verifica se lista uma ou todas as biblotecas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckBoxTodasBiblio_Checked(object sender, RoutedEventArgs e)
+        {
+            long tempId = this.idbiblioteca;
+            if(this.CheckBoxTodasBiblio.IsChecked==true){
+                //idbiblioteca = 0 para carregar todas as bibliotecas
+                this.idbiblioteca = 0;
+                atualizarListaViewLivros();
+                //volta a repor i id da biblioteca de trabalho
+                this.idbiblioteca = tempId;
+            }
+            else
+            {
+                atualizarListaViewLivros();
+            }
+        }
+        /// <summary>
+        /// #Ao escrever na textbox de pesquisa, pesquisa o que esta na texbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBox_PesquisaLivros_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PesquisaDadosLivros(TextBox_PesquisaLivros.Text);
+        }
+
+        /// <summary>
+        /// #limpa a texbox de pesquisa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Pesquisas_Click(object sender, RoutedEventArgs e)
+        {
+            this.TextBox_PesquisaLivros.Text = "";
+        }
+    
 
     }
 }
