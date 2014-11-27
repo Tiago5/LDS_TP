@@ -504,7 +504,5 @@ namespace Biblioteca
         {
             this.TextBox_PesquisaLivros.Text = "";
         }
-
-
     }
 }
