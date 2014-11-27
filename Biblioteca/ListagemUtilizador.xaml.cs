@@ -60,8 +60,7 @@ namespace Biblioteca
         // Ao fechar fecha todas as jalelas aberta por esta
         private void DataWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Fecha a janela Lista utilizadores e indica á Mainwindow que a janela foi fechada
-            MainWindow.windowsUtilizadoresAberta = false;
+            mainWindow.Button_Utilizador.IsEnabled = true;
 
             if (windowsInserirUtilizadorAberta == true)
             {
