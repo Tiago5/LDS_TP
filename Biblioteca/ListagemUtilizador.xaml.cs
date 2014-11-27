@@ -128,7 +128,7 @@ namespace Biblioteca
             Textbox_PesqUtilizador.Text = "";
         }
 
-        // visualiza os dados do utilizador para poderem ser alterados
+        // visualiza os dados do utilizador para poderem ser alterados.
         private void ListView_Utilizadores_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListView_Utilizadores.SelectedItem != null)
