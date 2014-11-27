@@ -21,6 +21,7 @@ namespace Biblioteca
     {
         private MainWindow mainWindow;
         private Boolean podeSubmeter = false;
+
         public AlterarLivroView(MainWindow mw)
         {
             InitializeComponent();
@@ -73,7 +74,7 @@ namespace Biblioteca
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MainWindow.windowsEditarLivroAberta = false;
+            mainWindow.Button_EditarLivro.IsEnabled = true;
         }
     }
 }

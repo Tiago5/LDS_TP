@@ -21,6 +21,7 @@ namespace Biblioteca
     {
         private MainWindow mainWindow;
         private string tipoEmprestimo;
+
         public Livros(MainWindow mw)
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace Biblioteca
         //Ao fechar informa a MainWindow que a janela livro foi fechada
         private void DataWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MainWindow.windowsInserirLivroAberta = false;
+            mainWindow.Button_InLivro.IsEnabled = true;
         }
 
         private void Button_SubmeterLivro_Click(object sender, RoutedEventArgs e)

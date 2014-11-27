@@ -81,32 +81,32 @@ namespace Biblioteca
         /// #Retorna o ID da biblioteca
         /// </summary>
         /// <returns>ID Biblioteca</returns>
-        public long getIdBiblioteca(){
+        public long getIdBiblioteca()
+        {
             return this.idbiblioteca;
         }
 
         // button para abrir a listagem de utilizadores
         private void Button_Utilizador_Click(object sender, RoutedEventArgs e)
         {
-            //Só abre a janela se ela estiver fechada.
-            if (windowsUtilizadoresAberta == false)
-            {
-                windowsUtilizadoresAberta = true;
-                listagemUtilizadorWindow = new ListagemUtilizador();
-                listagemUtilizadorWindow.Show();
-            }
+            //bloqueia botao apos ser clicado
+            Button_Utilizador.IsEnabled = false;
+
+            windowsUtilizadoresAberta = true;
+            listagemUtilizadorWindow = new ListagemUtilizador(this);
+            listagemUtilizadorWindow.Show();
         }
 
         // button para adicionar livro
         private void Button_InLivro_Click(object sender, RoutedEventArgs e)
-        {            
-                //Só abre a janela se ela estiver fechada
-                if (windowsInserirLivroAberta == false)
-                {
-                    windowsInserirLivroAberta = true;
-                    livrosInserirWindow = new Livros(this);
-                    livrosInserirWindow.Show();
-                }
+        {
+            //bloqueia botao apos ser clicado
+            Button_InLivro.IsEnabled = false;
+
+            windowsInserirLivroAberta = true;
+            livrosInserirWindow = new Livros(this);
+            livrosInserirWindow.Show();
+
         }
 
         //Procurar id na lista de livros da biblioteca de trabalho para alterar
@@ -293,7 +293,7 @@ namespace Biblioteca
                     if (this.RadioButtonAutor.IsChecked == true && l.Autor.ToLower().Contains(dadosPesquisar.ToLower()))
                     {
                         livrosPesquisados.Add(l);
-                    }             
+                    }
                 }
                 //o utilizador ve a lista dos livros encontrados
                 ListViewLivros.ItemsSource = livrosPesquisados;
@@ -353,19 +353,19 @@ namespace Biblioteca
 
         }
 
-    
+
 
         private void Button_EditarLivro_Click(object sender, RoutedEventArgs e)
         {
-                if (windowsEditarLivroAberta == false)
-                {
+            //bloqueia botao apos ser clicado
+            Button_EditarLivro.IsEnabled = false;
 
-                    windowsEditarLivroAberta = true;
-                    alterarLivroView = new AlterarLivroView(this);
-                    alterarLivroView.Show();
-                }
+            windowsEditarLivroAberta = true;
+            alterarLivroView = new AlterarLivroView(this);
+            alterarLivroView.Show();
+
         }
-        
+
 
         private void ListViewLivros_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -434,33 +434,35 @@ namespace Biblioteca
         // button emprestimo
         private void Button_Emprestimo_Click(object sender, RoutedEventArgs e)
         {
-                //Só abre a janela se ela estiver fechada
-                if (windowEmpretimoAberta == false)
-                {
-                    windowEmpretimoAberta = true;
-                    empretimoLivroWindow = new EmprestimoLivroWindow(this);
-                    empretimoLivroWindow.Show();
-                }
+            //bloqueia botao apos ser clicado
+            Button_Emprestimo.IsEnabled = false;
+
+            windowEmpretimoAberta = true;
+            empretimoLivroWindow = new EmprestimoLivroWindow(this);
+            empretimoLivroWindow.Show();
+
         }
 
         private void Button_Devolucao_Click(object sender, RoutedEventArgs e)
         {
-                if (windowDevolverLivro == false)
-                {
-                    devolverLivroWindow = new DevolvelLivroWindow(this);
-                    windowDevolverLivro = true;
-                    devolverLivroWindow.Show();
-                }
+            //bloqueia botao apos ser clicado
+            Button_Devolucao.IsEnabled = false;
+
+            devolverLivroWindow = new DevolvelLivroWindow(this);
+            windowDevolverLivro = true;
+            devolverLivroWindow.Show();
+
         }
 
         private void Button_ListarEmprestimo_Click(object sender, RoutedEventArgs e)
         {
-                if (windowListagemEmprestimosAberta == false)
-                {
-                    listagemEmprestimos = new ListagemEmprestimos(this.idbiblioteca);
-                    windowListagemEmprestimosAberta = true;
-                    listagemEmprestimos.Show();
-                }
+            //bloqueia botao apos ser clicado
+            Button_ListarEmprestimo.IsEnabled = false;
+
+            listagemEmprestimos = new ListagemEmprestimos(this.idbiblioteca,this);
+            windowListagemEmprestimosAberta = true;
+            listagemEmprestimos.Show();
+
         }
         /// <summary>
         /// #Verifica se lista uma ou todas as biblotecas
@@ -470,7 +472,8 @@ namespace Biblioteca
         private void CheckBoxTodasBiblio_Checked(object sender, RoutedEventArgs e)
         {
             long tempId = this.idbiblioteca;
-            if(this.CheckBoxTodasBiblio.IsChecked==true){
+            if (this.CheckBoxTodasBiblio.IsChecked == true)
+            {
                 //idbiblioteca = 0 para carregar todas as bibliotecas
                 this.idbiblioteca = 0;
                 atualizarListaViewLivros();
@@ -501,7 +504,7 @@ namespace Biblioteca
         {
             this.TextBox_PesquisaLivros.Text = "";
         }
-    
+
 
     }
 }

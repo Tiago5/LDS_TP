@@ -28,13 +28,15 @@ namespace Biblioteca
         private AlterarUtilizadorWindow alterarUtilizadorWindow;
         public static Boolean WindowsAlterarUtilizadorAberta = false;
         public static Boolean windowsInserirUtilizadorAberta = false;
-        public ListagemUtilizador()
+        private MainWindow mainWindow;
+
+        public ListagemUtilizador(MainWindow main)
         {
             InitializeComponent();
             dbListaUtilizadores = new Sqlite_Helper(this);
             dbListaUtilizadores.carregarUtilizadores();
             ListView_Utilizadores.ItemsSource = utilizadores;
-
+            this.mainWindow = main;
         }
         //Adiciona utilizadores a lista
         public void adicionaUtilizadores(long idU, string nome, string telefone, string email, string passWord, string morada, string cp, string localidade, string estado)
@@ -75,9 +77,8 @@ namespace Biblioteca
         //Button para inserir Utilizador
         private void Button_InserirUtilizador_Click(object sender, RoutedEventArgs e)
         {
-            //Só abre a janela se estiver fechada
-            if (windowsInserirUtilizadorAberta == false)
-            {
+                Button_InserirUtilizador.IsEnabled = false;
+
                 //Indica que foi aberta
                 windowsInserirUtilizadorAberta = true;
                 //Nota: na class Utilizadores não intancia a class Sqlite_helper
@@ -85,7 +86,6 @@ namespace Biblioteca
                 inserirUtilizadorWindow = new Utilizadores(this);
                 inserirUtilizadorWindow.Show();
 
-            }
         }
 
 

@@ -54,7 +54,7 @@ namespace Biblioteca
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             mainWindow.atualizarListaViewLivros();
-            MainWindow.windowEmpretimoAberta = false;
+            mainWindow.Button_Emprestimo.IsEnabled = true;
         }
 
 

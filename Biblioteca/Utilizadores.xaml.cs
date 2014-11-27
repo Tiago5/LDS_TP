@@ -21,6 +21,7 @@ namespace Biblioteca
     {
 
         private ListagemUtilizador ut;
+
         public Utilizadores(ListagemUtilizador ut)
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace Biblioteca
         // ao fechar a janela indica ao obj ListagemUtilizador que a janela foi fecha
         private void DataWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ListagemUtilizador.windowsInserirUtilizadorAberta = false;
+            ut.Button_InserirUtilizador.IsEnabled = true;
         }
         // executa o metodo da classe ListagemUtilizadores para enviar os dados do novo utilizador para a BD 
         private void Button_subMeter_Click(object sender, RoutedEventArgs e)

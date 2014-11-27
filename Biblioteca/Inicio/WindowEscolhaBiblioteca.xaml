@@ -9,9 +9,11 @@
         </Grid.ColumnDefinitions>
         <ComboBox x:Name="ComboBoxBiblioteca" HorizontalAlignment="Left" Margin="38,84,0,0" HorizontalContentAlignment="Left" VerticalAlignment="Top" Width="228" Grid.ColumnSpan="2" SelectionChanged="ComboBoxBiblioteca_SelectionChanged"/>
         <Label x:Name="LabelBiblioteca" Foreground="AntiqueWhite"  Content="ESCOLHA UMA DAS BIBLIOTECA"  HorizontalAlignment="Center" Margin="50,53,12,0" VerticalAlignment="Top" RenderTransformOrigin="2.325,0.266" Width="230" FontWeight="Bold" Grid.ColumnSpan="2"/>
-        <Button x:Name="ButtonBiblioteca" Content="OK" HorizontalAlignment="Left" Margin="109,134,0,0" VerticalAlignment="Top" Width="75" Click="ButtonBiblioteca_Click"/>
-
-
-
+        <Button x:Name="ButtonBiblioteca" HorizontalAlignment="Left" Margin="109,134,0,0" VerticalAlignment="Top" Width="75" Click="ButtonBiblioteca_Click">
+            <StackPanel>
+                <Image Source="/Imagens/log_in.png"/>
+                <TextBlock TextAlignment="Center">Entrar</TextBlock>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>
